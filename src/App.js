@@ -1,12 +1,11 @@
 import "./App.css";
+import SortingVisalizer from "./SortingVisualizer";
 
 function App() {
 
 
   return (
-    <div className="App">
-      Hola
-    </div>
+    <SortingVisalizer/>
   );
 }
 
