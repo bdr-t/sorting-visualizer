@@ -87,7 +87,7 @@ const Sort = () => {
 
   return (
     <>
-      <div style={{display: 'flex', justifyContent: 'space-around'}}>
+      <div style={{display: 'flex',gap:'2em', marginLeft:'10%'}}>
         <button
           style={{
             placeSelf: 'center',
@@ -122,7 +122,63 @@ const Sort = () => {
           onClick={() => handleClick()}>
           MERGE SORT
         </button>
+        <button
+          style={{
+            placeSelf: 'center',
+            padding: '1em',
+            borderRadius: '8px',
+            fontWeight: '700',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleClick()}>
+          SELECTION SORT
+        </button>
+        <button
+          style={{
+            placeSelf: 'center',
+            padding: '1em',
+            borderRadius: '8px',
+            fontWeight: '700',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleClick()}>
+          BUBBLE SORT
+        </button>
+        <button
+          style={{
+            placeSelf: 'center',
+            padding: '1em',
+            borderRadius: '8px',
+            fontWeight: '700',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleClick()}>
+          INSERTION SORT
+        </button>
+        <button
+          style={{
+            placeSelf: 'center',
+            padding: '1em',
+            borderRadius: '8px',
+            fontWeight: '700',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleClick()}>
+          HEAP SORT
+        </button>
+        <button
+          style={{
+            placeSelf: 'center',
+            padding: '1em',
+            borderRadius: '8px',
+            fontWeight: '700',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleClick()}>
+          QUICKSORT
+        </button>
       </div>
+      
 
       <div
         style={{
