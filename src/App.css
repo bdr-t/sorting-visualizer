@@ -1,7 +1,15 @@
-
+*{
+    margin:0;
+    padding: 0;
+    border:0;
+    outline: none;
+}
 .app{
     position: absolute;
     height: 100%;
     width: 100%;
     display: grid;
+    background-color: #141432;
+    grid-template-columns: auto;
+    grid-template-rows: 10% 90%;
 }
