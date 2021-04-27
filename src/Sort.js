@@ -1,7 +1,11 @@
-import {useState, useEffect} from 'react';
-import {generateArray} from './generateArray';
-import {mergeSort} from './mergeSort';
+import { useState, useEffect } from 'react';
+import { generateArray } from './generateArray';
+import { mergeSort } from './mergeSort';
+import { useDispatch } from 'react-redux';
+import { data } from './redux/mergeSortSlice';
 const Sort = () => {
+  const dispatch = useDispatch();
+
   const [bars, setBars] = useState([1, 2]);
   const [width, setWidth] = useState(document.body.offsetWidth);
   const [colors, setColors] = useState([1, 2]);
@@ -12,7 +16,7 @@ const Sort = () => {
   };
 
   useEffect(() => {
-    let numberOfBars = Math.floor((width * 0.80) / 12);
+    let numberOfBars = Math.floor((width * 0.8) / 12);
     let haha = generateArray(numberOfBars);
     setBars(haha);
   }, [width]);
@@ -55,6 +59,7 @@ const Sort = () => {
   async function handleClick() {
     let barsCopy = bars.slice();
     const [animations, colors] = await mergeSort(barsCopy);
+    dispatch(data([animations, colors]));
     setAnimation(animations);
     setColors(colors);
 
@@ -62,135 +67,48 @@ const Sort = () => {
   }
 
   let content = bars.map((value, idx) => (
-    <div
-      className="array-bar"
-      key={idx}
-      id={idx}
-      style={{
-        alignSelf: 'flex-end',
-        width: '10px',
-        marginLeft: '1px',
-        backgroundColor: `#00A6CB`,
-        height: `${value}%`,
-      }}></div>
+    <div className="bar" key={idx} id={idx} style={{ height: `${value}%` }}></div>
   ));
 
   function newArray() {
-    setAnimation([1,2])
-    setBars([1,2])
-    setColors([1,2])
-    let numberOfBars = Math.floor((width * 0.80) / 12);
+    setAnimation([1, 2]);
+    setBars([1, 2]);
+    setColors([1, 2]);
+    let numberOfBars = Math.floor((width * 0.8) / 12);
     let haha = generateArray(numberOfBars);
     setBars(haha);
-    
   }
 
   return (
     <>
-      <div style={{display: 'flex',gap:'2em', marginLeft:'10%'}}>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => newArray()}>
+      <div className="btn-container">
+        <button className="btn" onClick={() => newArray()}>
           NEW ARRAY
         </button>
-
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => customLoop(0)}>
+        <button className="btn" onClick={() => customLoop(0)}>
           SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" onClick={() => handleClick()}>
           MERGE SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" onClick={() => handleClick()}>
           SELECTION SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" onClick={() => handleClick()}>
           BUBBLE SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" lick={() => handleClick()}>
           INSERTION SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" onClick={() => handleClick()}>
           HEAP SORT
         </button>
-        <button
-          style={{
-            placeSelf: 'center',
-            padding: '1em',
-            borderRadius: '8px',
-            fontWeight: '700',
-            cursor: 'pointer',
-          }}
-          onClick={() => handleClick()}>
+        <button className="btn" onClick={() => handleClick()}>
           QUICKSORT
         </button>
       </div>
-      
 
-      <div
-        style={{
-          placeSelf: 'center',
-          height: '60%',
-          width: '80%',
-          backgroundColor: '#141432',
-          display: 'flex',
-          gap: '1px',
-        }}>
-        {content}
-      </div>
+      <div className="bars-container">{content}</div>
     </>
   );
 };
