@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { generateArray } from './generateArray';
-import { mergeSort } from './mergeSort';
+import { generateArray } from './actions/generateArray';
+import { mergeSort } from './algorithms/mergeSort';
 import { useDispatch } from 'react-redux';
 import { data } from './redux/mergeSortSlice';
 const Sort = () => {
