@@ -1,6 +1,7 @@
-let animations = []
-let colors = []
-function selectionSort(arr){
+
+export function selectionSort(arr){
+  let animations = []
+  let colors = []
   let comparisons = []
   for(let x = 0; x < arr.length; x++){
     let min = arr[x]
@@ -17,8 +18,12 @@ function selectionSort(arr){
       arr[x] = min
       arr[minIndex] = temp
       let arrCopy = arr.slice()
-      animations.push(arrCopy)
+      // animations.push(arrCopy)
+      animations[Number(x)] = arrCopy 
       colors.push(comparisons)
+      comparisons = []
+     
+
     }
     
     return [animations, colors]
