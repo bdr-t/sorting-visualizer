@@ -9,6 +9,15 @@ function App() {
   window.onresize = function () {
     setWidth(document.body.offsetWidth);
   };
+
+  // function newArray() {
+  //   setAnimation([1, 2]);
+  //   setBars([1, 2]);
+  //   setColors([1, 2]);
+  //   let numberOfBars = Math.floor((width * 0.8) / 12);
+  //   let haha = generateArray(numberOfBars);
+  //   setBars(haha);
+  // }
   
   let array = generateArray(Math.floor((width * 0.8) / 12))
 
