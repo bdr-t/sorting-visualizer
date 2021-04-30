@@ -170,7 +170,7 @@ const Sort = ({ array }) => {
   return (
     <>
       <div className="btn-container">
-        <button className="btn" }>NEW ARRAY</button>
+        <button className="btn" >NEW ARRAY</button>
         <button className="btn" onClick={() => mergeSortVisualization(0)}>
           SORT
         </button>

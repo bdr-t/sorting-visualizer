@@ -7,7 +7,7 @@ export function generateArray(length) {
   return barsArray;
 }
 
-function randomIntFromInterval(min, max) {
+export function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
