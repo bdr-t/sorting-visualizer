@@ -1,19 +1,33 @@
 export function insertionSort(array) {
+  let animations = [];
   let comparisons = [];
-  for (let i = 1; i < array.length; i++) {
+  let temps = []
+  let n = array.length;
+  for (let i = 1; i < n; i++) {
+    let anim = [];
     let colors = [];
-    let temp = array[i];
-    let y = i - 1
-    while(y> 0){
-      colors.push([y, y - 1]);
-      y--
-      }
-    if(colors.length >= 1){
-      comparisons.push(colors)
-    console.log(colors)
-      }
-    
-  }
 
-  return comparisons;
+    let y = i - 1;
+    while (y > 0) {
+      colors.push([y, y - 1]);
+      y--;
+    }
+    let current = array[i];
+    temps.push(current)
+
+    let j = i - 1;
+
+    while (j > -1 && current < array[j]) {
+      array[j + 1] = array[j];
+      anim.push([...array]);
+      j--;
+    }
+    array[j + 1] = current;
+    anim.push([...array]);
+
+    animations.push(anim);
+
+    comparisons.push(colors);
+  }
+  return [animations, comparisons, temps];
 }
