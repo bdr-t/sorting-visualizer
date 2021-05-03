@@ -29,7 +29,7 @@ function partition(arr, start, end){
     return pivotIndex;
 };
 
-function quickSort(arr, start, end) {
+export function quickSort(arr, start, end) {
     if (start >= end) {
         return
     }
@@ -40,6 +40,3 @@ function quickSort(arr, start, end) {
 }
 
 
-let arr = [10, 7, 8, 9, 1, 5]
-let n = arr.length
-let [haha, huhu, hihi] = quickSort(arr, 0, n-1)
