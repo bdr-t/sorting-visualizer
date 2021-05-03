@@ -31,6 +31,14 @@ const Sort = ({ array }) => {
     dispatch(selectionData({ selectionAnimations, selectionColors }));
   }, [bars]);
 
+  function cleanUp(){
+    let bar = document.getElementsByClassName('bar')
+    for(let i =0; i<bar.length; i++){
+      bar[i].style.backgroundColor = '#00A6CB';
+   }
+  }
+
+
   function mergeSortVisualization() {
     let animation = [...mergeAnimations];
     let colors = [...mergeColors];
@@ -121,6 +129,7 @@ const Sort = ({ array }) => {
         }, 1);
       if (x === colors[i].length) {
         console.log(barsCopy.length - 1 - i);
+        rechangeColor(0)
         rechangeColor(barsCopy.length - 1 - i, barsCopy.length - 2 - i);
         i++;
 
@@ -217,7 +226,7 @@ const Sort = ({ array }) => {
       if (x === comparisons[i].length) {
         rechangeColor(i,0)
         setBars(animations[i][j]);
-        
+        cleanUp()
         // let swaps
         // console.log(changes[i].length)
         // if(changes[i].length === 0){
