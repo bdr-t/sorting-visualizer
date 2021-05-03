@@ -8,6 +8,7 @@ import { changeColor, rechangeColor } from './actions/changeColor';
 import { selectionSort } from './algorithms/selectionSort';
 import { bubbleSort } from './algorithms/bubbleSort';
 import { insertionSort } from './algorithms/insertionSort';
+import { quickSort } from './algorithms/quickSort'
 
 const Sort = ({ array }) => {
   const [bars, setBars] = useState([1, 2]);
@@ -175,6 +176,66 @@ const Sort = ({ array }) => {
     customLoop2(0);
   }
 
+
+
+  function quickSortVisualization() {
+    let [comparisons, animations, changes] = quickSort([...bars], 0, bars.length-1);
+
+    console.log(comparisons)
+    console.log(animations)
+    console.log(changes)
+ 
+    function customLoop2(i) {
+      if (i < comparisons.length) {
+        customLoop(i, 0, 0, 0);
+      } else {
+      }
+    }
+
+    function customLoop(i, x, y, j) {
+      if (x < comparisons[i].length)
+        setTimeout(() => {
+          let color = comparisons[i][x];
+          let [bar1, bar2] = comparisons[i][x];
+          rechangeColor(bar1-1, bar2);
+          let swaps = changes[i][y];
+          if (swaps) {
+            if (color[0] === swaps[0] && color[1] === swaps[1]) {
+              setBars(animations[i][j]);
+              j++;
+              y++;
+            }
+          }
+          if(i === 8){
+            console.log('dont colore')
+          } else {
+            changeColor(bar1, bar2);
+          }
+          x++;
+          customLoop(i, x, y, j);
+        }, 10);
+      if (x === comparisons[i].length) {
+        rechangeColor(i,0)
+        setBars(animations[i][j]);
+        
+        // let swaps
+        // console.log(changes[i].length)
+        // if(changes[i].length === 0){
+        // } else if (changes[i].length === 1){
+        //   rechangeColor(changes[i][0][0],changes[i][0][1] )
+        // }else {
+        //   rechangeColor(changes[i][y-1][0],changes[i][y-1][1] )
+        // }
+        
+
+        i++;
+
+        customLoop2(i);
+      }
+    }
+    customLoop2(0);
+  }
+
   function testSortingAlgorithms() {
     for (let i = 0; i < 100; i++) {
       const haha = [];
@@ -224,7 +285,7 @@ const Sort = ({ array }) => {
         <button className="btn" onClick={() => mergeSortVisualization()}>
           HEAP SORT
         </button>
-        <button className="btn" onClick={() => testSortingAlgorithms()}>
+        <button className="btn" onClick={() => quickSortVisualization()}>
           QUICKSORT
         </button>
       </div>
