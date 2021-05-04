@@ -40,8 +40,10 @@ const Sort = ({ array }) => {
 
 
   function mergeSortVisualization() {
-    let animation = [...mergeAnimations];
-    let colors = [...mergeColors];
+    // let animation = [...mergeAnimations];
+    // let colors = [...mergeColors];
+
+    let [animation, colors] =  mergeSort([...bars])
 
     function customLoop(i) {
       i++;
@@ -67,8 +69,9 @@ const Sort = ({ array }) => {
   }
 
   function selectionSortVisualization() {
-    let animation = [...selectionAnimations];
-    let colors = [...selectionColors];
+    // let animation = [...selectionAnimations];
+    // let colors = [...selectionColors];
+    let [animation, colors] =  mergeSort([...bars])
     let j = animation.length - 1;
     function customLoop2(i) {
       if (i < animation.length) {
@@ -227,16 +230,6 @@ const Sort = ({ array }) => {
         rechangeColor(i,0)
         setBars(animations[i][j]);
         cleanUp()
-        // let swaps
-        // console.log(changes[i].length)
-        // if(changes[i].length === 0){
-        // } else if (changes[i].length === 1){
-        //   rechangeColor(changes[i][0][0],changes[i][0][1] )
-        // }else {
-        //   rechangeColor(changes[i][y-1][0],changes[i][y-1][1] )
-        // }
-        
-
         i++;
 
         customLoop2(i);
