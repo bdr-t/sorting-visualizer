@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { generateArray, randomIntFromInterval } from './actions/generateArray';
 import { mergeSort } from './algorithms/mergeSort';
-import { useDispatch, useSelector } from 'react-redux';
-import { data as mergeData } from './redux/mergeSortSlice';
-import { data as selectionData } from './redux/selectionSortSlice';
 import { changeColor, rechangeColor } from './actions/changeColor';
 import { selectionSort } from './algorithms/selectionSort';
 import { bubbleSort } from './algorithms/bubbleSort';
@@ -18,18 +15,7 @@ const Sort = ({ array }) => {
 
   if (bars.length !== array.length) setBars(array);
 
-  const dispatch = useDispatch();
-  let selectionAnimations = useSelector((state) => state.selectionSort.animations);
-  let selectionColors = useSelector((state) => state.selectionSort.colors);
-  let mergeAnimations = useSelector((state) => state.mergeSort.animations);
-  let mergeColors = useSelector((state) => state.mergeSort.colors);
 
-  useEffect(() => {
-    const [mergeAnimations, mergeColors] = mergeSort([...array]);
-    dispatch(mergeData({ mergeAnimations, mergeColors }));
-    const [selectionAnimations, selectionColors] = selectionSort([...array]);
-    dispatch(selectionData({ selectionAnimations, selectionColors }));
-  }, [bars]);
 
   function cleanUp(){
     let bar = document.getElementsByClassName('bar')
@@ -71,7 +57,7 @@ const Sort = ({ array }) => {
   function selectionSortVisualization() {
     // let animation = [...selectionAnimations];
     // let colors = [...selectionColors];
-    let [animation, colors] =  mergeSort([...bars])
+    let [animation, colors] =  selectionSort([...bars])
     let j = animation.length - 1;
     function customLoop2(i) {
       if (i < animation.length) {
