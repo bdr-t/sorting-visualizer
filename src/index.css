@@ -1,7 +1,8 @@
 body {
+  background-color: #141432;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,28 +16,30 @@ code {
   height: 100%;
   width: 100%;
   display: grid;
-  background-color: #141432;
   grid-template-columns: auto;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 5% 10% 85%;
 }
 
 .btn-container {
+  margin-top: 1.5em;
   display: flex;
-  gap: 2em;
-  margin-left: 10%;
+  justify-content: center;
+  gap: 1.5em;
 }
 
 .btn {
+  background-color: lightgrey;
   place-self: center;
   padding: 1em;
-  border-radius: 8px;
+  border-radius: 5px;
   font-weight: 700;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .bars-container {
   place-self: center;
-  height: 65%;
+  height: 75%;
   width: 80%;
   background-color: #141432;
   display: flex;
@@ -47,4 +50,35 @@ code {
   width: 10px;
   margin-left: 1px;
   background-color: #00a6cb;
+}
+
+@media only screen and (min-width: 850px) {
+  .app {
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: 15% 1fr;
+  }
+
+  .bars-container {
+    position: absolute;
+    top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%);
+  }
+  .new-array {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-top: 10em;
+  }
+  .sort {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .btn-container {
+    flex-direction: column;
+    place-content: center;
+    gap: 2em;
+  }
+  .btn {
+    width: 90px;
+  }
 }

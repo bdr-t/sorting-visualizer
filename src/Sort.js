@@ -253,11 +253,7 @@ const Sort = ({ array }) => {
 
   return (
     <>
-      <div className="btn-container">
-        <button className="btn">NEW ARRAY</button>
-        <button className="btn" onClick={() => mergeSortVisualization(0)}>
-          SORT
-        </button>
+      <div className="btn-container sort">
         <button className="btn" onClick={() => mergeSortVisualization()}>
           MERGE SORT
         </button>
@@ -270,11 +266,8 @@ const Sort = ({ array }) => {
         <button className="btn" onClick={() => insertionSortVisualization()}>
           INSERTION SORT
         </button>
-        <button className="btn" onClick={() => mergeSortVisualization()}>
-          HEAP SORT
-        </button>
         <button className="btn" onClick={() => quickSortVisualization()}>
-          QUICKSORT
+          QUICK SORT
         </button>
       </div>
 
