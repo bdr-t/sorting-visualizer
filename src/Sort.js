@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { generateArray, randomIntFromInterval } from './actions/generateArray';
+// import {randomIntFromInterval } from './actions/generateArray';
 import { mergeSort } from './algorithms/mergeSort';
 import { changeColor, rechangeColor } from './actions/changeColor';
-import { selectionSort } from './algorithms/selectionSort';
 import { bubbleSort } from './algorithms/bubbleSort';
 import { insertionSort } from './algorithms/insertionSort';
 import { quickSort } from './algorithms/quickSort'
@@ -14,6 +13,36 @@ const Sort = ({ array }) => {
   // const [animation, setAnimation] = useState([1, 2]);
 
   if (bars.length !== array.length) setBars(array);
+
+  function selectionSort(arr){
+    let animations = []
+    let colors = []
+    let comparisons = []
+    for(let x = 0; x < arr.length; x++){
+      let min = arr[x]
+      let minIndex = x
+      for(let y = x+1; y < arr.length; y++){
+        comparisons.push([x, y])
+        if(arr[y] < min){
+          min = arr[y]
+          minIndex = y
+          }
+        }
+        
+        let temp = arr[x]
+        arr[x] = min
+        arr[minIndex] = temp
+        let arrCopy = arr.slice()
+        // animations.push(arrCopy)
+        animations[Number(x)] = arrCopy 
+        colors.push(comparisons)
+        comparisons = []
+       
+  
+      }
+      
+      return [animations, colors]
+    }
 
 
 
@@ -224,28 +253,28 @@ const Sort = ({ array }) => {
     customLoop2(0);
   }
 
-  function testSortingAlgorithms() {
-    for (let i = 0; i < 100; i++) {
-      const haha = [];
-      const length = randomIntFromInterval(1, 1000);
-      for (let i = 0; i < length; i++) {
-        haha.push(randomIntFromInterval(-1000, 1000));
-      }
-      const javaScriptSortedArray = haha.slice().sort((a, b) => a - b);
-      const array = insertionSort(haha.slice());
-      console.log(arraysAreEqual(javaScriptSortedArray, array));
-    }
-  }
+  // function testSortingAlgorithms() {
+  //   for (let i = 0; i < 100; i++) {
+  //     const haha = [];
+  //     const length = randomIntFromInterval(1, 1000);
+  //     for (let i = 0; i < length; i++) {
+  //       haha.push(randomIntFromInterval(-1000, 1000));
+  //     }
+  //     const javaScriptSortedArray = haha.slice().sort((a, b) => a - b);
+  //     const array = insertionSort(haha.slice());
+  //     console.log(arraysAreEqual(javaScriptSortedArray, array));
+  //   }
+  // }
 
-  function arraysAreEqual(arrayOne, arrayTwo) {
-    if (arrayOne.length !== arrayTwo.length) return false;
-    for (let i = 0; i < arrayOne.length; i++) {
-      if (arrayOne[i] !== arrayTwo[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
+  // function arraysAreEqual(arrayOne, arrayTwo) {
+  //   if (arrayOne.length !== arrayTwo.length) return false;
+  //   for (let i = 0; i < arrayOne.length; i++) {
+  //     if (arrayOne[i] !== arrayTwo[i]) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   let content = bars.map((value, idx) => (
     <div className="bar" key={idx} id={idx} style={{ height: `${value}%` }}></div>
