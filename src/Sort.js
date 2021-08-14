@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 // import {randomIntFromInterval } from './actions/generateArray';
-import { mergeSort } from './algorithms/mergeSort';
-import { changeColor, rechangeColor } from './actions/changeColor';
-import { bubbleSort } from './algorithms/bubbleSort';
-import { insertionSort } from './algorithms/insertionSort';
-import { quickSort } from './algorithms/quickSort'
+import { mergeSort } from "./algorithms/mergeSort";
+import { changeColor, rechangeColor } from "./actions/changeColor";
+import { bubbleSort } from "./algorithms/bubbleSort";
+import { insertionSort } from "./algorithms/insertionSort";
+import { quickSort } from "./algorithms/quickSort";
 
 const Sort = ({ array }) => {
   const [bars, setBars] = useState([1, 2]);
@@ -14,51 +14,46 @@ const Sort = ({ array }) => {
 
   if (bars.length !== array.length) setBars(array);
 
-  function selectionSort(arr){
-    let animations = []
-    let colors = []
-    let comparisons = []
-    for(let x = 0; x < arr.length; x++){
-      let min = arr[x]
-      let minIndex = x
-      for(let y = x+1; y < arr.length; y++){
-        comparisons.push([x, y])
-        if(arr[y] < min){
-          min = arr[y]
-          minIndex = y
-          }
+  function selectionSort(arr) {
+    let animations = [];
+    let colors = [];
+    let comparisons = [];
+    for (let x = 0; x < arr.length; x++) {
+      let min = arr[x];
+      let minIndex = x;
+      for (let y = x + 1; y < arr.length; y++) {
+        comparisons.push([x, y]);
+        if (arr[y] < min) {
+          min = arr[y];
+          minIndex = y;
         }
-        
-        let temp = arr[x]
-        arr[x] = min
-        arr[minIndex] = temp
-        let arrCopy = arr.slice()
-        // animations.push(arrCopy)
-        animations[Number(x)] = arrCopy 
-        colors.push(comparisons)
-        comparisons = []
-       
-  
       }
-      
-      return [animations, colors]
+
+      let temp = arr[x];
+      arr[x] = min;
+      arr[minIndex] = temp;
+      let arrCopy = arr.slice();
+      // animations.push(arrCopy)
+      animations[Number(x)] = arrCopy;
+      colors.push(comparisons);
+      comparisons = [];
     }
 
-
-
-  function cleanUp(){
-    let bar = document.getElementsByClassName('bar')
-    for(let i =0; i<bar.length; i++){
-      bar[i].style.backgroundColor = '#00A6CB';
-   }
+    return [animations, colors];
   }
 
+  function cleanUp() {
+    let bar = document.getElementsByClassName("bar");
+    for (let i = 0; i < bar.length; i++) {
+      bar[i].style.backgroundColor = "#00A6CB";
+    }
+  }
 
   function mergeSortVisualization() {
     // let animation = [...mergeAnimations];
     // let colors = [...mergeColors];
 
-    let [animation, colors] =  mergeSort([...bars])
+    let [animation, colors] = mergeSort([...bars]);
 
     function customLoop(i) {
       i++;
@@ -86,7 +81,7 @@ const Sort = ({ array }) => {
   function selectionSortVisualization() {
     // let animation = [...selectionAnimations];
     // let colors = [...selectionColors];
-    let [animation, colors] =  selectionSort([...bars])
+    let [animation, colors] = selectionSort([...bars]);
     let j = animation.length - 1;
     function customLoop2(i) {
       if (i < animation.length) {
@@ -147,7 +142,7 @@ const Sort = ({ array }) => {
         }, 1);
       if (x === colors[i].length) {
         console.log(barsCopy.length - 1 - i);
-        rechangeColor(0)
+        rechangeColor(0);
         rechangeColor(barsCopy.length - 1 - i, barsCopy.length - 2 - i);
         i++;
 
@@ -157,10 +152,9 @@ const Sort = ({ array }) => {
     customLoop2(0);
   }
 
-
   function insertionSortVisualization() {
     let [animations, comparisons, changes] = insertionSort([...bars]);
- 
+
     function customLoop2(i) {
       if (i < comparisons.length) {
         customLoop(i, 0, 0, 0);
@@ -172,7 +166,7 @@ const Sort = ({ array }) => {
         setTimeout(() => {
           let color = comparisons[i][x];
           let [bar1, bar2] = comparisons[i][x];
-          rechangeColor(bar1, bar2+1);
+          rechangeColor(bar1, bar2 + 1);
           let swaps = changes[i][y];
           if (swaps) {
             if (color[0] === swaps[0] && color[1] === swaps[1]) {
@@ -182,8 +176,8 @@ const Sort = ({ array }) => {
               y++;
             }
           }
-          if(i === 8){
-            console.log('dont colore')
+          if (i === 8) {
+            console.log("dont colore");
           } else {
             changeColor(bar1, bar2);
           }
@@ -191,8 +185,8 @@ const Sort = ({ array }) => {
           customLoop(i, x, y, j);
         }, 10);
       if (x === comparisons[i].length) {
-        rechangeColor(i,0)
-        rechangeColor(bars.length - 1)
+        rechangeColor(i, 0);
+        rechangeColor(bars.length - 1);
         setBars(animations[i][j]);
 
         i++;
@@ -203,15 +197,17 @@ const Sort = ({ array }) => {
     customLoop2(0);
   }
 
-
-
   function quickSortVisualization() {
-    let [comparisons, animations, changes] = quickSort([...bars], 0, bars.length-1);
+    let [comparisons, animations, changes] = quickSort(
+      [...bars],
+      0,
+      bars.length - 1
+    );
 
-    console.log(comparisons)
-    console.log(animations)
-    console.log(changes)
- 
+    console.log(comparisons);
+    console.log(animations);
+    console.log(changes);
+
     function customLoop2(i) {
       if (i < comparisons.length) {
         customLoop(i, 0, 0, 0);
@@ -224,7 +220,7 @@ const Sort = ({ array }) => {
         setTimeout(() => {
           let color = comparisons[i][x];
           let [bar1, bar2] = comparisons[i][x];
-          rechangeColor(bar1-1, bar2);
+          rechangeColor(bar1 - 1, bar2);
           let swaps = changes[i][y];
           if (swaps) {
             if (color[0] === swaps[0] && color[1] === swaps[1]) {
@@ -233,8 +229,8 @@ const Sort = ({ array }) => {
               y++;
             }
           }
-          if(i === 8){
-            console.log('dont colore')
+          if (i === 8) {
+            console.log("dont colore");
           } else {
             changeColor(bar1, bar2);
           }
@@ -242,9 +238,9 @@ const Sort = ({ array }) => {
           customLoop(i, x, y, j);
         }, 10);
       if (x === comparisons[i].length) {
-        rechangeColor(i,0)
+        rechangeColor(i, 0);
         setBars(animations[i][j]);
-        cleanUp()
+        cleanUp();
         i++;
 
         customLoop2(i);
@@ -277,7 +273,12 @@ const Sort = ({ array }) => {
   // }
 
   let content = bars.map((value, idx) => (
-    <div className="bar" key={idx} id={idx} style={{ height: `${value}%` }}></div>
+    <div
+      className="bar"
+      key={idx}
+      id={idx}
+      style={{ height: `${value}%` }}
+    ></div>
   ));
 
   return (
@@ -300,7 +301,9 @@ const Sort = ({ array }) => {
         </button>
       </div>
 
-      <div className="bars-container">{content}</div>
+      <div className="container">
+        <div className="bars-container">{content}</div>
+      </div>
     </>
   );
 };
