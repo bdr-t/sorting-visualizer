@@ -8,11 +8,12 @@ import { quickSort } from "./algorithms/quickSort";
 
 const Sort = ({ array }) => {
   const [bars, setBars] = useState([1, 2]);
-
   // const [colors, setColors] = useState([1, 2]);
   // const [animation, setAnimation] = useState([1, 2]);
 
   if (bars.length !== array.length) setBars(array);
+
+  if(bars[0] !== array[0] && bars[1] !== array[1] && bars[2] !== array[2]) setBars(array)
 
   function selectionSort(arr) {
     let animations = [];

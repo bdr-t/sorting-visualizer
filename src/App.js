@@ -5,6 +5,9 @@ import { useState } from 'react';
 
 function App() {
   const [width, setWidth] = useState(document.body.offsetWidth);
+  const [array, setArray] = useState(generateArray(Math.floor((width * 0.9) / 12)))
+
+
 
   window.onresize = function () {
     setWidth(document.body.offsetWidth);
@@ -19,12 +22,16 @@ function App() {
   //   setBars(haha);
   // }
 
-  let array = generateArray(Math.floor((width * 0.9) / 12));
+  // let array = generateArray(Math.floor((width * 0.9) / 12));
+
+  function handleClick(){
+    setArray(generateArray(Math.floor((width * 0.9) / 12)))
+  }
 
   return (
     <div className="app">
       <div className="btn-container new-array">
-        <button className="btn" style={{width:'105px', backgroundColor:'#D68EC3'}}>NEW ARRAY</button>
+        <button onClick={()=>handleClick()} className="btn" style={{width:'105px', backgroundColor:'#D68EC3'} }>NEW ARRAY</button>
         <button className="btn">Speed</button>
       </div>
 
