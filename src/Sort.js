@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import {randomIntFromInterval } from './actions/generateArray';
 import { mergeSort } from "./algorithms/mergeSort";
 import { changeColor, rechangeColor } from "./actions/changeColor";
@@ -6,16 +6,24 @@ import { bubbleSort } from "./algorithms/bubbleSort";
 import { insertionSort } from "./algorithms/insertionSort";
 import { quickSort } from "./algorithms/quickSort";
 
-const Sort = ({ array }) => {
+const Sort = ({ array, speed }) => {
   const [bars, setBars] = useState([1, 2]);
+  const [sorting, setSorting] = useState(false)
   // const [colors, setColors] = useState([1, 2]);
   // const [animation, setAnimation] = useState([1, 2]);
 
+
   if (bars.length !== array.length) setBars(array);
 
-  if(bars[0] !== array[0] && bars[1] !== array[1] && bars[2] !== array[2]) setBars(array)
+  // console.log(speed)
+
+  useEffect(()=>{
+    if(sorting) return
+    setBars(array)
+  }, [array])
 
   function selectionSort(arr) {
+    if(sorting) return
     let animations = [];
     let colors = [];
     let comparisons = [];
@@ -51,6 +59,8 @@ const Sort = ({ array }) => {
   }
 
   function mergeSortVisualization() {
+    if(sorting) return
+    setSorting(true)
     // let animation = [...mergeAnimations];
     // let colors = [...mergeColors];
 
@@ -70,6 +80,7 @@ const Sort = ({ array }) => {
             if (i === animation.length - 1) {
               let [bar3, bar4] = colors[i];
               rechangeColor(bar3, bar4);
+              setSorting(false)
             }
           } else {
           }
@@ -80,6 +91,8 @@ const Sort = ({ array }) => {
   }
 
   function selectionSortVisualization() {
+    if(sorting) return
+    setSorting(true)
     // let animation = [...selectionAnimations];
     // let colors = [...selectionColors];
     let [animation, colors] = selectionSort([...bars]);
@@ -89,6 +102,7 @@ const Sort = ({ array }) => {
         customLoop(i, 0, j, animation.length);
         j--;
       }
+      if(i === (animation.length-1)) setSorting(false)
     }
 
     function customLoop(i, x, length, imp) {
@@ -108,6 +122,7 @@ const Sort = ({ array }) => {
             x++;
             if (animation[i]) setBars(animation[i - 1]);
             customLoop2(i);
+            
           }
         }, 10);
       }
@@ -116,6 +131,8 @@ const Sort = ({ array }) => {
   }
 
   function bubbleSortVisualization() {
+    if(sorting) return
+    setSorting(true);
     let barsCopy = [...bars];
 
     let colors = bubbleSort([...bars]);
@@ -123,6 +140,7 @@ const Sort = ({ array }) => {
       if (i < colors.length) {
         customLoop(i, 0);
       }
+      if(i === (colors.length - 1)) setSorting(false)
     }
     function customLoop(i, x) {
       if (x < colors[i].length)
@@ -142,7 +160,6 @@ const Sort = ({ array }) => {
           customLoop(i, x);
         }, 1);
       if (x === colors[i].length) {
-        console.log(barsCopy.length - 1 - i);
         rechangeColor(0);
         rechangeColor(barsCopy.length - 1 - i, barsCopy.length - 2 - i);
         i++;
@@ -154,13 +171,15 @@ const Sort = ({ array }) => {
   }
 
   function insertionSortVisualization() {
+    if(sorting) return
+    setSorting(true)
     let [animations, comparisons, changes] = insertionSort([...bars]);
 
     function customLoop2(i) {
       if (i < comparisons.length) {
         customLoop(i, 0, 0, 0);
-      } else {
-      }
+      } 
+      if(i === (comparisons.length - 1)) setSorting(false)
     }
     function customLoop(i, x, y, j) {
       if (x < comparisons[i].length)
@@ -184,7 +203,7 @@ const Sort = ({ array }) => {
           }
           x++;
           customLoop(i, x, y, j);
-        }, 10);
+        }, speed*10);
       if (x === comparisons[i].length) {
         rechangeColor(i, 0);
         rechangeColor(bars.length - 1);
@@ -199,21 +218,23 @@ const Sort = ({ array }) => {
   }
 
   function quickSortVisualization() {
+    if(sorting) return
+    setSorting(true)
     let [comparisons, animations, changes] = quickSort(
       [...bars],
       0,
       bars.length - 1
     );
 
-    console.log(comparisons);
-    console.log(animations);
-    console.log(changes);
+    // console.log(comparisons);
+    // console.log(animations);
+    // console.log(changes);
 
     function customLoop2(i) {
       if (i < comparisons.length) {
         customLoop(i, 0, 0, 0);
-      } else {
-      }
+      } 
+      if(i === (comparisons.length - 1)) setSorting(false)
     }
 
     function customLoop(i, x, y, j) {
@@ -250,28 +271,6 @@ const Sort = ({ array }) => {
     customLoop2(0);
   }
 
-  // function testSortingAlgorithms() {
-  //   for (let i = 0; i < 100; i++) {
-  //     const haha = [];
-  //     const length = randomIntFromInterval(1, 1000);
-  //     for (let i = 0; i < length; i++) {
-  //       haha.push(randomIntFromInterval(-1000, 1000));
-  //     }
-  //     const javaScriptSortedArray = haha.slice().sort((a, b) => a - b);
-  //     const array = insertionSort(haha.slice());
-  //     console.log(arraysAreEqual(javaScriptSortedArray, array));
-  //   }
-  // }
-
-  // function arraysAreEqual(arrayOne, arrayTwo) {
-  //   if (arrayOne.length !== arrayTwo.length) return false;
-  //   for (let i = 0; i < arrayOne.length; i++) {
-  //     if (arrayOne[i] !== arrayTwo[i]) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
 
   let content = bars.map((value, idx) => (
     <div
@@ -310,3 +309,27 @@ const Sort = ({ array }) => {
 };
 
 export default Sort;
+
+
+ // function testSortingAlgorithms() {
+  //   for (let i = 0; i < 100; i++) {
+  //     const haha = [];
+  //     const length = randomIntFromInterval(1, 1000);
+  //     for (let i = 0; i < length; i++) {
+  //       haha.push(randomIntFromInterval(-1000, 1000));
+  //     }
+  //     const javaScriptSortedArray = haha.slice().sort((a, b) => a - b);
+  //     const array = insertionSort(haha.slice());
+  //     console.log(arraysAreEqual(javaScriptSortedArray, array));
+  //   }
+  // }
+
+  // function arraysAreEqual(arrayOne, arrayTwo) {
+  //   if (arrayOne.length !== arrayTwo.length) return false;
+  //   for (let i = 0; i < arrayOne.length; i++) {
+  //     if (arrayOne[i] !== arrayTwo[i]) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
