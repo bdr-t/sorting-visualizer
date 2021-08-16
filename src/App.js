@@ -12,8 +12,9 @@ function App() {
 
   window.onresize = function () {
     setWidth(document.body.offsetWidth);
-    setArray(generateArray(Math.floor((width * 0.9) / 12)));
+    setArray(generateArray(Math.floor((document.body.offsetWidth * 0.9) / 12)));
   };
+
 
   // function newArray() {
   //   setAnimation([1, 2]);
@@ -31,13 +32,13 @@ function App() {
   }
 
   function addSpeed() {
-    if(speed >= 10) return
-    setSpeed(speed+1)
+    if (speed >= 10) return;
+    setSpeed(speed + 1);
   }
 
   function removeSpeed() {
-    if(speed <= 1) return
-    setSpeed(speed-1)
+    if (speed <= 1) return;
+    setSpeed(speed - 1);
   }
 
   return (
@@ -50,10 +51,14 @@ function App() {
         >
           NEW ARRAY
         </button>
-        <div style={{ display: "flex", gap:'0.2em' }}>
-          <button className="btn" onClick={()=> addSpeed()}>+</button>
+        <div style={{ display: "flex", gap: "0.2em" }}>
+          <button className="btn" onClick={() => addSpeed()}>
+            +
+          </button>
           <button className="btn">Speed {speed}</button>
-          <button className="btn" onClick={()=> removeSpeed()}>-</button>
+          <button className="btn" onClick={() => removeSpeed()}>
+            -
+          </button>
         </div>
       </div>
 

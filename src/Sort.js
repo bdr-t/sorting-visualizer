@@ -16,6 +16,7 @@ const Sort = ({ array, speed: s }) => {
 
   if (bars.length !== array.length) setBars(array);
 
+
   // console.log(speed)
 
   useEffect(()=>{
