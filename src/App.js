@@ -8,7 +8,7 @@ function App() {
   const [array, setArray] = useState(
     generateArray(Math.floor((width * 0.9) / 12))
   );
-  const [speed, setSpeed] = useState(5);
+  const [speed, setSpeed] = useState(10);
 
   window.onresize = function () {
     setWidth(document.body.offsetWidth);

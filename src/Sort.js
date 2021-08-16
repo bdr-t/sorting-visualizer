@@ -6,9 +6,10 @@ import { bubbleSort } from "./algorithms/bubbleSort";
 import { insertionSort } from "./algorithms/insertionSort";
 import { quickSort } from "./algorithms/quickSort";
 
-const Sort = ({ array, speed }) => {
+const Sort = ({ array, speed: s }) => {
   const [bars, setBars] = useState([1, 2]);
   const [sorting, setSorting] = useState(false)
+  const [speed, setSpeed] = useState(s)
   // const [colors, setColors] = useState([1, 2]);
   // const [animation, setAnimation] = useState([1, 2]);
 
@@ -21,6 +22,22 @@ const Sort = ({ array, speed }) => {
     if(sorting) return
     setBars(array)
   }, [array])
+
+  useEffect(()=>{
+    let cache = {
+      10: 10, 
+      9: 50, 
+      8: 150, 
+      7: 200,
+      6: 250,
+      5: 300,
+      4: 350,
+      3: 400,
+      2: 450,
+      1: 500,
+    }
+    setSpeed(cache[s])
+  }, [s])
 
   function selectionSort(arr) {
     if(sorting) return
@@ -84,7 +101,7 @@ const Sort = ({ array, speed }) => {
             }
           } else {
           }
-        }, 100);
+        }, speed);
       }
     }
     customLoop(0);
@@ -124,7 +141,7 @@ const Sort = ({ array, speed }) => {
             customLoop2(i);
             
           }
-        }, 10);
+        }, speed);
       }
     }
     customLoop2(0);
@@ -158,7 +175,7 @@ const Sort = ({ array, speed }) => {
           changeColor(bar1, bar2);
           x++;
           customLoop(i, x);
-        }, 1);
+        }, speed);
       if (x === colors[i].length) {
         rechangeColor(0);
         rechangeColor(barsCopy.length - 1 - i, barsCopy.length - 2 - i);
@@ -203,7 +220,7 @@ const Sort = ({ array, speed }) => {
           }
           x++;
           customLoop(i, x, y, j);
-        }, speed*10);
+        }, speed);
       if (x === comparisons[i].length) {
         rechangeColor(i, 0);
         rechangeColor(bars.length - 1);
@@ -258,7 +275,7 @@ const Sort = ({ array, speed }) => {
           }
           x++;
           customLoop(i, x, y, j);
-        }, 10);
+        }, speed);
       if (x === comparisons[i].length) {
         rechangeColor(i, 0);
         setBars(animations[i][j]);
